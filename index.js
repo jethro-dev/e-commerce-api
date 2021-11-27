@@ -26,11 +26,13 @@ app.use("/api/v1/carts", cartRoute);
 app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/payment", paymentRoute);
 
+const port = process.env.PORT || 5000;
+
 const startServer = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
-    await app.listen(process.env.PORT || 5000, () =>
-      console.log(`Server is listening on port: ${process.env.PORT}`)
+    await app.listen(port, () =>
+      console.log(`Server is listening on port: ${port}`)
     );
   } catch (err) {
     console.log(err);
