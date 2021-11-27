@@ -19,8 +19,11 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 
 //GET ALL ORDERS
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
+  const query = req.query.new;
   try {
-    const orders = await Order.find();
+    const orders = query
+      ? await Order.find().sort({ createdAt: -1 }).limit(5)
+      : await Order.find();
     return res.status(200).json(orders);
   } catch (err) {
     return res.status(500).json(err);
@@ -75,7 +78,11 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
     );
 
     const income = await Order.aggregate([
-      { $match: { createdAt: { $gt: previousMonth } } },
+      {
+        $match: {
+          createdAt: { $gt: previousMonth },
+        },
+      },
       {
         $project: {
           month: { $month: "$createdAt" },
@@ -88,6 +95,7 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
           total: { $sum: "$sales" },
         },
       },
+      { $sort: { _id: 1 } },
     ]);
 
     res.status(200).json(income);

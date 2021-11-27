@@ -29,8 +29,8 @@ app.use("/api/v1/payment", paymentRoute);
 const startServer = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
-    await app.listen(process.env.PORT, () =>
-      console.log(`Server is listening on port ${process.env.PORT}`)
+    await app.listen(process.env.PORT || 5000, () =>
+      console.log(`Server is listening on port: ${process.env.PORT}`)
     );
   } catch (err) {
     console.log(err);
