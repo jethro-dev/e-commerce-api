@@ -14,8 +14,8 @@ This is the server side of the e-commerce web app. The server side is built with
 
 ## Link 🔗
 
-Client:
-[Click Me!](https://logo-eshop.netlify.app/)
-
-Server: (Example: fetching products)
+Server Link: (Example: fetching products)
 [Click Me!](https://logo-eshop.herokuapp.com/api/v1/products)
+
+Client GitHub Link:
+[Click Me!](https://github.com/obiito01/e-commerce-client)
