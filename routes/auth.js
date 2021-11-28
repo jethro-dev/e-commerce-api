@@ -44,8 +44,7 @@ router.post("/login", async (req, res) => {
           id: user._id,
           admin: user.admin,
         },
-        process.env.JWT_SECRET,
-        { expiresIn: "3d" }
+        process.env.JWT_SECRET
       );
 
       return res.status(200).json({ ...others, accessToken });
